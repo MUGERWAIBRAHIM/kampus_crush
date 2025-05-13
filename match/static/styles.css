@@ -1,0 +1,253 @@
+/* General styles */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* Card Container */
+.custom-card {
+    background-color: rgb(159, 198, 227);
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Help Text */
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+/* Submit Button */
+.btn-submit {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Link */
+a {
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .custom-card {
+        padding: 20px;
+    }
+}
+
+.dashboard-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn-dashboard {
+    background-color: #04115e;
+    color: white;
+    padding: 15px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dashboard:hover {
+    background-color: #0b0558;
+}
+
+.match-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.match-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 10px;
+    width: 180px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.match-img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1; /* take up remaining space */
+    justify-content: space-between;
+}
+
+.event-card {
+    padding: 20px;
+    background-color: #fefefe;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.event-desc {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.event-list {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.navbar li {
+    margin: 5px 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-info {
+    color: #ccc;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.welcome-banner {
+    position: relative;
+    z-index: 1;
+    padding: 100px 20px 50px 20px; /* ensures space below navbar and above footer */
+    color: white;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.welcome-text {
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent dark background */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.welcome-text h1 {
+    margin-bottom: 10px;
+    color: #d63384;
+}
+
+.footer-content {
+    text-align: center;
+    padding: 20px;
+    background: #f1f1f1;
+    font-size: 0.9em;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #d63384;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: #ffc0cb;
+}
+
+.bg-light {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: #ffc0cb;
+}

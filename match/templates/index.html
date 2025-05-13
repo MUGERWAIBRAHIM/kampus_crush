@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kampus Crush{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        .navbar {
+            background-color: pink;
+            padding: 10px 0;
+        }
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar li {
+            display: inline;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .contact-info {
+            margin-left: auto;
+            font-weight: bold;
+        }
+
+        .footer-content {
+            background-color: pink;
+            padding: 15px;
+            text-align: center;
+        }
+        .footer-content a {
+            text-decoration: none;
+            color: black;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .slideshow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+
+        .slideshow img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            opacity: 0;
+            animation: slideShow 15s infinite;
+        }
+
+        .slideshow img:nth-child(1) { animation-delay: 0s; }
+        .slideshow img:nth-child(2) { animation-delay: 5s; }
+        .slideshow img:nth-child(3) { animation-delay: 10s; }
+
+        @keyframes slideShow {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            30% { opacity: 1; }
+            40% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+    </style>
+    {% block style %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+<nav class="navbar">
+    <ul>
+        <img src="{% static 'logo.png' %}" alt="Logo" width="100">
+        <li><a href="{% url 'index' %}">🏠 Home</a></li>
+        <li><a href="{% url 'signup' %}">🔑 Sign up</a></li>
+        <li><a href="{% url 'login' %}">🔐 Login</a></li>
+        <li><a href="{% url 'view_events' %}">📅 Events</a></li>
+        <li><a href="{% url 'choose_interest' %}">💘 Find Match</a></li>
+        <li><a href="{% url 'get_support' %}"> Get Support</a></li>
+        </ul>
+</nav>
+    <!-- Welcome Message Below Navbar -->
+<section class="welcome-banner">
+<div class="slideshow">
+    <img src="{% static 'images/pexels-edwardeyer-1001445.jpg' %}" alt="">
+    <img src="{% static 'images/pexels-ohshineon-18397.jpg' %}" alt="">
+    <img src="{% static 'images/pexels-vjapratama-935822.jpg' %}" alt="">
+</div>
+        <div class="welcome-text">
+            <h1>Welcome to Kampus Krush 💕</h1>
+            <p>Connect with friends, discover love, and stay updated on upcoming events around campus. Let the adventure begin!</p>
+            <p>Ready to spark something special? Kampus Krush is more than just a platform—it's your gateway to meaningful connections, unforgettable campus events, and the chance to discover love right where you are. Whether you're here to meet new people, stay in the loop with what's happening around campus, or find that one person who just gets you, Kampus Krush makes it easy, fun, and exciting. Don’t just scroll—start your journey, explore, connect, and let something amazing begin today. 💕</p>
+        </div>
+</section>
+
+    <!-- Main Content -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-media">
+                <a href="https://www.facebook.com" target="_blank">🌐 Facebook</a> |
+                <a href="https://www.twitter.com" target="_blank">🌐 X</a> |
+                <a href="https://www.instagram.com" target="_blank">🌐 Instagram</a>
+            </div>
+            <p>© 2025 Kampus Crush</p>
+        </div>
+</footer>
+
+</body>
+</html>

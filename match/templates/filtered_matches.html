@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matches – Kampus Crush</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="custom-card text-center">
+        <h2 class="mb-4">Matches for "{{ interest }}"</h2>
+
+        {% if matches %}
+            <div class="match-grid">
+                {% for match in matches %}
+                    <div class="match-card">
+                        <img src="https://via.placeholder.com/150" class="match-img" alt="Profile Pic">
+                        <h4>{{match.profile_pic}} | {{ match.user.first_name }}</h4>
+                        <p>{{ match.age }} | {{ match.college }}</p>
+                        <p>Interest: {{ match.interest }}</p>
+                        <button class="btn-submit">View Profile</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No matches found for your age bracket and college. Try a different interest!</p>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

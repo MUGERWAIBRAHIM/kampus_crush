@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Kampus Crush</title>
+    <link rel="stylesheet" href="{%static 'styles.css' %}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card custom-card mx-auto">
+        <h2 class="text-center mb-4">Login to Your Account</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="error-message">
+                    {% for error in form.non_field_errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <p class="text-center mt-3">Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
+    </div>
+</div>
+
+</body>
+</html>

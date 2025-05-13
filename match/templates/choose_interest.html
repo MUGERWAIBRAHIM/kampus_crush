@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Interests – Kampus Crush</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="custom-card text-center">
+        <h2 class="mb-4">Find a Match</h2>
+        <p>Select your preferred age bracket and at least one interest:</p>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Age Bracket -->
+            <div class="form-group">
+                <label for="age_bracket">Select Age Bracket:</label>
+                <select name="age_bracket" class="form-control" required>
+                    <option value="">-- Choose an Age Bracket --</option>
+                    <option value="18-19">18–19</option>
+                    <option value="20-23">20–23</option>
+                    <option value="24-26">23–26</option>
+                    <option value="26+">26+</option>
+                </select>
+            </div>
+
+            <!-- Interests -->
+            <div class="form-group mt-4 text-left">
+                <label>Select Interests:</label><br>
+                {% for interest in interests %}
+                    <label>
+                        <input type="checkbox" name="interests" value="{{ interest.id }}">
+                        {{ interest.name }}
+                    </label><br>
+                {% endfor %}
+            </div>
+
+            <br>
+            <div class="dashboard-buttons">
+                <a href="{% url 'filtered_matches' %}" class="btn-dashboard">Show Matches❤️</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
