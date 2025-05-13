@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-s7*r^^dx62b=9ry7)*amkckuk4^+7$%un3@(mqsbee83od-&fh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['kampus_crush.onrender.com']
+ALLOWED_HOSTS = ['kampus-crush.onrender.com']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
