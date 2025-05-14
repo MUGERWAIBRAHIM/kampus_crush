@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: kampus-krush
+    env: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: gunicorn kampus_crush.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: kampus_crush.settings
+      - key: PYTHON_VERSION
+        value: 3.11
+      # Optional if using SQLite (don’t add if you're using Postgres)
+      - key: DATABASE_URL
+        value: sqlite:///db.sqlite3
