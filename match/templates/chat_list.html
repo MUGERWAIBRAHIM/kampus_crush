@@ -1,0 +1,103 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Chats</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        .username {
+            color: black;
+            font-weight: bold;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            display: block;
+            margin: auto;
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="custom-card text-center">
+        <h2 class="mb-4">Your Chats</h2>
+        {% if conversations %}
+            <ul class="chat-list">
+                {% for user, message in conversations.items %}
+                    <li class="chat-preview" style="display: flex; align-items: center; gap: 10px;">
+                        <!-- Profile Picture -->
+                        {% if user.profile_pic %}
+                            <img src="{{ user.profile_pic.url }}" alt="Profile Picture" width="50" height="50" style="border-radius: 50%;" onclick="showImageModal('{{ user.profile_pic.url }}')">
+                        {% else %}
+                            <img src="{% static 'images/default-avatar.png' %}" alt="Default Profile" width="50" height="50" style="border-radius: 50%;" onclick="showImageModal('{% static 'images/default-avatar.png' %}')">
+                        {% endif %}
+
+                        <!-- Chat Info -->
+                        <div style="text-align: left;">
+                            <a href="{% url 'chat' user.username %}">
+                                <strong class="username">{{ user.username }}</strong><br>
+                                <small>
+                                    {% if message.sender == request.user %}
+                                        You:
+                                    {% endif %}
+                                    {{ message.content|truncatewords:10 }}
+                                </small><br>
+                                <span class="timestamp">{{ message.timestamp|naturaltime }}</span>
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have no conversations yet.</p>
+        {% endif %}
+    </div>
+</div>
+<!-- Image Modal -->
+<div id="imageModal" class="modal" onclick="hideImageModal()" style="display:none;">
+    <span class="close" onclick="hideImageModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+<script>
+function showImageModal(src) {
+    var modal = document.getElementById("imageModal");
+    var modalImg = document.getElementById("modalImage");
+    modal.style.display = "block";
+    modalImg.src = src;
+}
+
+function hideImageModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>

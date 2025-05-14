@@ -11,6 +11,11 @@ urlpatterns = [
     path('filtered_matches/', views.filtered_matches, name='filtered_matches'),
     path("accounts/verify/", views.verify_code, name="verify_code"),
     path('get_support/', views.get_support, name='get_support'),
+    path('chat/<str:username>/', views.chat, name='chat'),
+    path('chats/', views.chat_list, name='chat_list'),
+    path('profile/', views.view_profile, name='view_profile'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('user/<str:username>/', views.view_user_profile, name='view_user_profile'),
 ]
 
 

@@ -1,6 +1,6 @@
 from allauth.account.forms import SignupForm
 from django import forms
-from .models import CustomUser, Interest
+from .models import CustomUser, Interest,Message
 from django.core.mail import send_mail
 import random
 
@@ -42,3 +42,17 @@ class CustomSignupForm(SignupForm):
         )
 
         return user
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Type your message...'}),
+        }
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['first_name', 'last_name', 'bio', 'age', 'location', 'college', 'profile_pic', 'interests']
+        widgets = {
+            'interests': forms.CheckboxSelectMultiple,
+        }

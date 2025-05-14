@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-s7*r^^dx62b=9ry7)*amkckuk4^+7$%un3@(mqsbee83od-&fh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['kampus-crush.onrender.com']
+ALLOWED_HOSTS = ['kampus-crush.onrender.com','127.0.0.1']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django.contrib.humanize',
 ]
 
 SITE_ID = 1
@@ -124,7 +125,8 @@ AUTH_USER_MODEL = 'match.CustomUser'
 # settings.py
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/

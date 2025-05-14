@@ -1,49 +1,70 @@
+{% extends 'index.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Get Support | Kampus Krush</title>
-  <link rel="stylesheet" href="{% static 'styles.css' %}">
-  <style>
-    /* Same CSS as earlier (or customize as needed) */
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Need Help? 💬</h1>
-    <p>Welcome to the Kampus Krush Support Center</p>
-  </header>
 
-  <div class="container">
+{% block title %}Get Support | Kampus Krush{% endblock %}
+{% block content %}
+<style>
+    body {
+        background-color: #ffc0cb;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .support-box {
+        background-color: white;
+        padding: 30px;
+        margin: 30px auto;
+        border-radius: 12px;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .container {
+        text-align: center;
+        margin-bottom: 0px;
+        height: 40%;
+        width: 60%;
+        padding: 0px;
+        margin: 30px auto;
+        border-radius: 12px;
+    }
+</style>
+
+<div class="support-box">
+    <header>
+        <h1>Need Help? 💬</h1>
+        <p>Welcome to the Kampus Krush Support Center</p>
+    </header>
+
     {% if messages %}
-      {% for message in messages %}
-        <p style="color: green;">{{ message }}</p>
-      {% endfor %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
     {% endif %}
 
     <h2>Watch How to Use the Website</h2>
-    <video controls>
-      <source src="{% static 'videos/guide.mp4' %}" type="video/mp4">
-      Your browser does not support the video tag.
+    <video controls width="100%">
+        <source src="{% static 'videos/guide.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
+</div>
 
+<div class="container">
     <h2>Still need help?</h2>
     <form method="post">
-      {% csrf_token %}
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Describe your issue or question" required></textarea>
-      <button type="submit">Send Message</button>
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Describe your issue or question" required></textarea>
+        <button type="submit">Send Message</button>
     </form>
-
+{% endblock %}
     <div class="social">
-      <p>Follow us or reach out via:</p>
-      <a href="https://facebook.com/">🌐 Facebook</a>
-      <a href="https://x.com/">🌐 X</a>
-      <a href="https://instagram.com/">🌐 Instagram</a>
+        <p>Follow us or reach out via:</p>
+        <a href="https://facebook.com/">🌐 Facebook</a>
+        <a href="https://x.com/">🌐 X</a>
+        <a href="https://instagram.com/">🌐 Instagram</a>
     </div>
-  </div>
-</body>
-</html>
+</div>

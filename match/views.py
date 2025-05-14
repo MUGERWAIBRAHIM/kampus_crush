@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
-from .forms import CustomSignupForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import CustomSignupForm,MessageForm,ProfileForm
 from django.contrib.auth.decorators import login_required
-from .models import CustomUser,Interest
+from .models import CustomUser,Interest,Message
 import random
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
+from django.db.models import Q
 
 def index(request):
     return render(request, 'index.html')
@@ -52,14 +53,11 @@ def choose_interest(request):
 @login_required
 def filtered_matches(request):
     selected_bracket = request.session.get('selected_bracket')
-    selected_interest_ids = request.session.get('selected_interest_ids', [])
+    selected_interest_ids = list(map(int, request.session.get('selected_interest_ids', [])))
     
     current_user = request.user
-    potential_matches = CustomUser.objects.filter(
-        college=current_user.college
-    ).exclude(id=current_user.id)
+    potential_matches = CustomUser.objects.exclude(id=current_user.id)
 
-    # Match based on age bracket
     matches = []
     for user in potential_matches:
         if user.age_bracket() == selected_bracket:
@@ -129,3 +127,62 @@ def get_support(request):
         messages.success(request, 'Your message has been sent successfully!')
     
     return render(request, 'get_support.html')
+
+@login_required
+def chat(request, username):
+    other_user = CustomUser.objects.get(username=username)
+
+    messages = Message.objects.filter(
+        Q(sender=request.user, receiver=other_user) |
+        Q(sender=other_user, receiver=request.user)
+    ).order_by('timestamp')
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            new_message = form.save(commit=False)
+            new_message.sender = request.user
+            new_message.receiver = other_user
+            new_message.save()
+            return redirect('chat', username=other_user.username)
+    else:
+        form = MessageForm()
+
+    return render(request, 'chat.html', {
+        'messages': messages,
+        'form': form,
+        'other_user': other_user
+    })
+
+@login_required
+def chat_list(request):
+    messages = Message.objects.filter(Q(sender=request.user) | Q(receiver=request.user))
+
+    conversation_data = {}
+
+    for msg in messages.order_by('-timestamp'):
+        other_user = msg.receiver if msg.sender == request.user else msg.sender
+        if other_user not in conversation_data:
+            conversation_data[other_user] = msg  # Save the latest message per user
+
+    return render(request, 'chat_list.html', {'conversations': conversation_data})
+
+@login_required
+def view_profile(request):
+    return render(request, 'profile.html', {'user': request.user})
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+    else:
+        form = ProfileForm(instance=user)
+    return render(request, 'edit_profile.html', {'form': form})
+
+def view_user_profile(request, username):
+    user = get_object_or_404(CustomUser, username=username)
+    return render(request, 'user_profile.html', {'user_profile': user})

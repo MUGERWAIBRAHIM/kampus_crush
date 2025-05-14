@@ -251,3 +251,22 @@ a:hover {
     box-sizing: border-box;
     background-color: #ffc0cb;
 }
+
+.chat-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.chat-preview {
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+.timestamp {
+    color: gray;
+    font-size: 0.8em;
+}

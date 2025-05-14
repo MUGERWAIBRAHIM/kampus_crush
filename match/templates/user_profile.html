@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user_profile.username }}'s Profile</title>
+    <style>
+        body {
+            background-color: #ffc0cb; /* Soft pink background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            background-color: white;
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        img {
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 8px 0;
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #d63384;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+                background-color: #ad1f64;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>{{ user_profile.username }}'s Profile</h2>
+        {% if user_profile.profile_pic %}
+            <img src="{{ user_profile.profile_pic.url }}" width="150" height="150" style="border-radius: 50%;">
+        {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" width="150" height="150" style="border-radius: 50%;">
+        {% endif %}
+        <p><strong>Username:</strong> {{ user_profile.username }}</p>
+        <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+        <p><strong>Age:</strong> {{ user_profile.age }}</p>
+        <p><strong>Location:</strong> {{ user_profile.location }}</p>
+        <p><strong>College:</strong> {{ user_profile.college }}</p>
+        <p><strong>Interests:</strong> {{ user_profile.interests.all|join:", " }}</p>
+    </div>
+</body>
+</html>

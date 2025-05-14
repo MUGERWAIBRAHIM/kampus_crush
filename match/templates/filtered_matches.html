@@ -1,30 +1,43 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Matches – Kampus Crush</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            background-color: #ffc0cb; /* Soft pink background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container mt-5">
     <div class="custom-card text-center">
-        <h2 class="mb-4">Matches for "{{ interest }}"</h2>
+        <h2 class="mb-4">Your Matches</h2>
 
         {% if matches %}
             <div class="match-grid">
                 {% for match in matches %}
                     <div class="match-card">
-                        <img src="https://via.placeholder.com/150" class="match-img" alt="Profile Pic">
-                        <h4>{{match.profile_pic}} | {{ match.user.first_name }}</h4>
+                        {% if match.profile_pic %}
+                            <img src="{{ match.profile_pic.url }}" width="150" height="150" style="border-radius: 50%;">
+                        {% else %}
+                            <img src="{% static 'images/default-avatar.png' %}" width="150" height="150" style="border-radius: 50%;">
+                        {% endif %}   
+                        <h4>  {{ match.username }} </h4>
                         <p>{{ match.age }} | {{ match.college }}</p>
-                        <p>Interest: {{ match.interest }}</p>
-                        <button class="btn-submit">View Profile</button>
+                        <a href="{% url 'chat' match.username %}" class="btn-submit">Message</a>
+                        <a href="{% url 'view_user_profile' match.username %}" class="btn-submit">Profile</a>
                     </div>
                 {% endfor %}
             </div>
         {% else %}
-            <p>No matches found for your age bracket and college. Try a different interest!</p>
+            <p>No matches found for your age bracket. Try a different interest!</p>
         {% endif %}
     </div>
 </div>
