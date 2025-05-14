@@ -126,7 +126,7 @@ AUTH_USER_MODEL = 'match.CustomUser'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
