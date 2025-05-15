@@ -168,3 +168,4 @@ EMAIL_HOST_PASSWORD = 'vhwf afae ijcq duqz'
 DEFAULT_FROM_EMAIL = 'mugerwaibrahim90@gmail.com'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+LOGOUT_REDIRECT_URL = 'login' 

@@ -78,6 +78,14 @@
             40% { opacity: 0; }
             100% { opacity: 0; }
         }
+
+        .navbar a.active {
+            color: white;
+            background-color: black;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+
     </style>
     {% block style %}{% endblock %}
 </head>
@@ -109,8 +117,16 @@
                 <button style="font-size: 20px; padding: 12px 24px; background-color: lightgreen; border: none;">📅 View Events</button>
             </a>
             <a href="{% url 'choose_interest' %}">
-                <button style="font-size: 20px; padding: 12px 24px; background-color: lightgreen; border: none;">💘 Find a Match</button>
+                <button style="font-size: 20px; padding: 12px 24px; background-color:rgb(50, 213, 250); border: none;">💘 Find a Match</button>
             </a>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" 
+                    style="font-size: 20px; padding: 12px 24px; background-color:rgb(252, 28, 28); border: none; color: white; border-radius: 5px;">
+                    Logout
+                </button>
+            </form>
+
         </div>
 </section>
 {% endblock %}
@@ -125,6 +141,25 @@
             <p>© 2025 Kampus Crush</p>
         </div>
 </footer>
+<script>
+    // Highlight the active navbar link
+    document.addEventListener('DOMContentLoaded', function () {
+        const navLinks = document.querySelectorAll('.navbar a');
+
+        navLinks.forEach(link => {
+            // Add click listener to each link
+            link.addEventListener('click', function () {
+                navLinks.forEach(l => l.classList.remove('active')); // Remove active class from all
+                this.classList.add('active'); // Add to clicked one
+            });
+
+            // Add 'active' class if link matches current page URL
+            if (link.href === window.location.href) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

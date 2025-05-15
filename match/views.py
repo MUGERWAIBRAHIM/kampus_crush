@@ -121,7 +121,7 @@ def get_support(request):
             subject='Support Request from Kampus Krush',
             message=full_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=['deotechnologiesl@gmail.com'],
+            recipient_list=['mugerwaibrahim90@gmail.com'],
         )
 
         messages.success(request, 'Your message has been sent successfully!')
